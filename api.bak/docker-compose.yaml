@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  api:
+    image: ubo-api
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      PORT: 80
+      JWT_SECRET: "HKHJDKKJHKJHKEHHU"
+      DATABASE_URL: "postgresql://postgres:password@192.168.1.47:5432/ubo?schema=public"

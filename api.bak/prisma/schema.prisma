@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+
+  createdAt     DateTime @default(now())
+  createdById   String?
+  createdBy     Admin?   @relation("AdminCreatedBy", fields: [createdById], references: [id])
+  createdAdmins Admin[]  @relation("AdminCreatedBy")
+
+  updatedAt     DateTime @updatedAt
+  updatedById   String?
+  updatedBy     Admin?   @relation("AdminUpdatedBy", fields: [updatedById], references: [id])
+  updatedAdmins Admin[]  @relation("AdminUpdatedBy")
+
+  auditLogs AuditLog[]
+}
+
+model AuditLog {
+  id String @id @default(cuid())
+
+  resource AuditLogResource
+  activity AuditLogActivity
+
+  performById String
+  performBy   Admin  @relation(fields: [performById], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+enum AuditLogResource {
+  AUTH
+  ADMIN
+}
+
+enum AuditLogActivity {
+  LOGIN
+  CREATE
+  UPDATE_PASSWORD
+  DELETE
+}

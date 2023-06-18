@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "192.168.1.47",
+            "driver": "PostgreSQL",
+            "name": "local",
+            "connectString": "postgresql://postgres:password@192.168.1.47:5432/ubo?schema=public"
+        }
+    ]
+}

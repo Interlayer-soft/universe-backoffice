@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # Generated
 src/__generated__/
+
+# Environment variables
+.env

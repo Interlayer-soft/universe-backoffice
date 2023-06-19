@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Admin, AuditLogActivity, AuditLogResource } from '@prisma/client';
-import { DbService } from '../db/db.service';
+import { PrismaService } from 'nestjs-prisma';
 import { OkResponse } from '../dto/ok.dto';
 
 @Injectable()
 export class AuditLogService {
-  constructor(private readonly dbSvc: DbService) {}
+  constructor(private readonly dbSvc: PrismaService) {}
 
   async create(payload: {
     performBy: Admin;

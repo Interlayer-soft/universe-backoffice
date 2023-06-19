@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { Admin, AuditLogActivity, AuditLogResource } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
+import { PrismaService } from 'nestjs-prisma';
 import { AuditLogService } from 'src/pkg/audit-log/audit-log.service';
-import { DbService } from 'src/pkg/db/db.service';
 import { ByIdDto } from 'src/pkg/dto/by-id.dto';
 import { OkResponse } from 'src/pkg/dto/ok.dto';
 import { Iam } from 'src/pkg/iam/iam.decorator';
@@ -24,7 +24,7 @@ import { UpdateAdminPwdDto } from './dto/update-pwd.admin.dto';
 @UseGuards(IamGuard)
 export class AdminController {
   constructor(
-    private readonly dbSvc: DbService,
+    private readonly dbSvc: PrismaService,
     private readonly auditLogSvc: AuditLogService,
   ) {}
 

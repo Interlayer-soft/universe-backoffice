@@ -1,5 +1,5 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { DbService } from 'src/pkg/db/db.service';
+import { PrismaService } from 'nestjs-prisma';
 import { IamGuard } from 'src/pkg/iam/iam.guard';
 import { CursorPaginationResponse } from '../auth/dto/cursor-pagination.dto';
 import { ListAuditLogQuery } from './dto/list.audit-log.dto';
@@ -8,7 +8,7 @@ import { RetrieveAuditLogResponse } from './dto/retrieve.audit-log';
 @UseGuards(IamGuard)
 @Controller('audit-logs')
 export class AuditLogController {
-  constructor(private readonly dbSvc: DbService) {}
+  constructor(private readonly dbSvc: PrismaService) {}
 
   @Get()
   async list(

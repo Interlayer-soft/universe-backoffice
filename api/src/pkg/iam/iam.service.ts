@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Admin } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
-import { DbService } from '../db/db.service';
+import { PrismaService } from 'nestjs-prisma';
+
 @Injectable()
 export class IamService {
   constructor(
-    private readonly dbSvc: DbService,
+    private readonly dbSvc: PrismaService,
     private readonly jwtSvc: JwtService,
   ) {}
 

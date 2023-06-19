@@ -7,8 +7,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Admin, AuditLogActivity, AuditLogResource } from '@prisma/client';
+import { PrismaService } from 'nestjs-prisma';
 import { AuditLogService } from 'src/pkg/audit-log/audit-log.service';
-import { DbService } from 'src/pkg/db/db.service';
 import { Iam } from 'src/pkg/iam/iam.decorator';
 import { IamGuard } from 'src/pkg/iam/iam.guard';
 import { IamService } from 'src/pkg/iam/iam.service';
@@ -18,7 +18,7 @@ import { ProfileResponse } from './dto/profile.auth';
 @Controller('auth')
 export class AuthController {
   constructor(
-    private readonly dbSvc: DbService,
+    private readonly dbSvc: PrismaService,
     private readonly iamSvc: IamService,
     private readonly auditLogSvc: AuditLogService,
   ) {}

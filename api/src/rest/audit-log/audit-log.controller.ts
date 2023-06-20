@@ -1,17 +1,19 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { PrismaService } from 'nestjs-prisma';
+import { ApiOkResponsePaginated } from 'src/pkg/decorator/api-ok-response-paginated.decorator';
 import { IamGuard } from 'src/pkg/iam/iam.guard';
-import { CursorPaginationResponse } from '../auth/dto/cursor-pagination.dto';
+import { CursorPaginationResponse } from '../../pkg/dto/cursor-pagination.dto';
 import { ListAuditLogQuery } from './dto/list.audit-log.dto';
 import { RetrieveAuditLogResponse } from './dto/retrieve.audit-log';
-
-@ApiTags('audit-logs')
+@ApiBearerAuth()
 @UseGuards(IamGuard)
+@ApiTags('audit-logs')
 @Controller('audit-logs')
 export class AuditLogController {
   constructor(private readonly dbSvc: PrismaService) {}
 
+  @ApiOkResponsePaginated(RetrieveAuditLogResponse)
   @Get()
   async list(
     @Query() query: ListAuditLogQuery,

@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
@@ -20,6 +21,20 @@ export class CursorPaginationResponse<T> {
     return this._items.slice(0, this.take);
   }
 
+  @ApiProperty({
+    type: 'object',
+    properties: {
+      take: {
+        type: 'number',
+      },
+      cursor: {
+        type: 'string',
+      },
+      nextId: {
+        type: 'string',
+      },
+    },
+  })
   @Expose()
   get meta() {
     return {

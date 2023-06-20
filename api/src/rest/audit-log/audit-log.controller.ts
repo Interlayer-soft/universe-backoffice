@@ -1,10 +1,12 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { PrismaService } from 'nestjs-prisma';
 import { IamGuard } from 'src/pkg/iam/iam.guard';
 import { CursorPaginationResponse } from '../auth/dto/cursor-pagination.dto';
 import { ListAuditLogQuery } from './dto/list.audit-log.dto';
 import { RetrieveAuditLogResponse } from './dto/retrieve.audit-log';
 
+@ApiTags('audit-logs')
 @UseGuards(IamGuard)
 @Controller('audit-logs')
 export class AuditLogController {

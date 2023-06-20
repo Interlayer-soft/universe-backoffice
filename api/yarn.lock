@@ -1039,6 +1039,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs/mapped-types@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@nestjs/mapped-types@npm:2.0.0"
+  peerDependencies:
+    "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
+    class-transformer: ^0.4.0 || ^0.5.0
+    class-validator: ^0.13.0 || ^0.14.0
+    reflect-metadata: ^0.1.12
+  peerDependenciesMeta:
+    class-transformer:
+      optional: true
+    class-validator:
+      optional: true
+  checksum: a43380f2a00f6b7aed0c171ce3e9334466782cdeb0da9b5a3d858d74cb0b96ab26afa55f3d4152907df8f512b30a3ff7f432df53b0ff952672fed7d70d503186
+  languageName: node
+  linkType: hard
+
 "@nestjs/platform-express@npm:^9.0.0":
   version: 9.4.3
   resolution: "@nestjs/platform-express@npm:9.4.3"
@@ -1066,6 +1083,33 @@ __metadata:
   peerDependencies:
     typescript: ">=4.3.5"
   checksum: d7ee0236cc0e130c3bfb2f4794112b0f2e24caaf09323f553acb595629da4ba042aaf98dd5237bf7c9fd389df915930877d23757ea3e7e2b5da94539c1e5c36e
+  languageName: node
+  linkType: hard
+
+"@nestjs/swagger@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "@nestjs/swagger@npm:7.0.1"
+  dependencies:
+    "@nestjs/mapped-types": 2.0.0
+    js-yaml: 4.1.0
+    lodash: 4.17.21
+    path-to-regexp: 3.2.0
+    swagger-ui-dist: 4.19.0
+  peerDependencies:
+    "@fastify/static": ^6.0.0
+    "@nestjs/common": ^9.0.0 || ^10.0.0
+    "@nestjs/core": ^9.0.0 || ^10.0.0
+    class-transformer: "*"
+    class-validator: "*"
+    reflect-metadata: ^0.1.12
+  peerDependenciesMeta:
+    "@fastify/static":
+      optional: true
+    class-transformer:
+      optional: true
+    class-validator:
+      optional: true
+  checksum: 5c507a4b4a3196ae19892489fdabcc45efd59cd0ecccf78c27b5ff27e2edb6df37e90a9be0c5a4f81c263dfc6399487a605c2eca6a16aff4aa494dd5e8c21390
   languageName: node
   linkType: hard
 
@@ -2262,6 +2306,7 @@ __metadata:
     "@nestjs/jwt": ^10.1.0
     "@nestjs/platform-express": ^9.0.0
     "@nestjs/schematics": ^9.0.0
+    "@nestjs/swagger": ^7.0.1
     "@nestjs/testing": ^9.0.0
     "@prisma/client": ^4.15.0
     "@types/bcryptjs": ^2.4.2
@@ -2286,6 +2331,7 @@ __metadata:
     rxjs: ^7.2.0
     source-map-support: ^0.5.20
     supertest: ^6.1.3
+    swagger-ui-express: ^4.6.3
     ts-jest: 29.0.5
     ts-loader: ^9.2.3
     ts-node: ^10.0.0
@@ -5127,6 +5173,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-yaml@npm:4.1.0, js-yaml@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "js-yaml@npm:4.1.0"
+  dependencies:
+    argparse: ^2.0.1
+  bin:
+    js-yaml: bin/js-yaml.js
+  checksum: c7830dfd456c3ef2c6e355cc5a92e6700ceafa1d14bba54497b34a99f0376cecbb3e9ac14d3e5849b426d5a5140709a66237a8c991c675431271c4ce5504151a
+  languageName: node
+  linkType: hard
+
 "js-yaml@npm:^3.10.0, js-yaml@npm:^3.13.1":
   version: 3.14.1
   resolution: "js-yaml@npm:3.14.1"
@@ -5136,17 +5193,6 @@ __metadata:
   bin:
     js-yaml: bin/js-yaml.js
   checksum: bef146085f472d44dee30ec34e5cf36bf89164f5d585435a3d3da89e52622dff0b188a580e4ad091c3341889e14cb88cac6e4deb16dc5b1e9623bb0601fc255c
-  languageName: node
-  linkType: hard
-
-"js-yaml@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "js-yaml@npm:4.1.0"
-  dependencies:
-    argparse: ^2.0.1
-  bin:
-    js-yaml: bin/js-yaml.js
-  checksum: c7830dfd456c3ef2c6e355cc5a92e6700ceafa1d14bba54497b34a99f0376cecbb3e9ac14d3e5849b426d5a5140709a66237a8c991c675431271c4ce5504151a
   languageName: node
   linkType: hard
 
@@ -7052,6 +7098,31 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
+"swagger-ui-dist@npm:4.19.0":
+  version: 4.19.0
+  resolution: "swagger-ui-dist@npm:4.19.0"
+  checksum: a813128a7a10534e57b2d56913b7c3c216445254c1eda7ac8198331fb63e50754232b4f53178814abab51ba17b8e8fdc6e6e8c438f5070f83dc2f33cfe840916
+  languageName: node
+  linkType: hard
+
+"swagger-ui-dist@npm:>=4.11.0":
+  version: 5.0.0
+  resolution: "swagger-ui-dist@npm:5.0.0"
+  checksum: 61e3eddccde87c10eb0bf6a159e43d58ef4ba0d7346747579cc7cab8d82222507a4ce676801834943ccb853126500bf4c6953041e5ff47a0dddad248398ca1e1
+  languageName: node
+  linkType: hard
+
+"swagger-ui-express@npm:^4.6.3":
+  version: 4.6.3
+  resolution: "swagger-ui-express@npm:4.6.3"
+  dependencies:
+    swagger-ui-dist: ">=4.11.0"
+  peerDependencies:
+    express: ">=4.0.0 || >=5.0.0-beta"
+  checksum: bd0e02d2572685fcd82701b29f27ba6a27bc72de2b1553e84f884d008a0bf85a3711c9e236bb658130d702892866744d1a8a30b52b887e4f8224635c57afc63d
   languageName: node
   linkType: hard
 

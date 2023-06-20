@@ -8,6 +8,13 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Admin, AuditLogActivity, AuditLogResource } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from 'nestjs-prisma';
@@ -20,14 +27,19 @@ import { CreateAdminDto } from './dto/create.admin.dto';
 import { RetrieveAdminResponse } from './dto/retrieve.admin.dto';
 import { UpdateAdminPwdDto } from './dto/update-pwd.admin.dto';
 
-@Controller('admins')
+@ApiTags('admins')
+@ApiBearerAuth()
 @UseGuards(IamGuard)
+@Controller('admins')
 export class AdminController {
   constructor(
     private readonly dbSvc: PrismaService,
     private readonly auditLogSvc: AuditLogService,
   ) {}
 
+  @ApiCreatedResponse({
+    type: OkResponse,
+  })
   @Post()
   async create(
     @Iam() admin: Admin,
@@ -55,6 +67,10 @@ export class AdminController {
     return new OkResponse(true);
   }
 
+  @ApiOkResponse({
+    isArray: true,
+    type: RetrieveAdminResponse,
+  })
   @Get()
   async list(@Iam() admin: Admin): Promise<RetrieveAdminResponse[]> {
     const admins = await this.dbSvc.admin.findMany({
@@ -70,6 +86,13 @@ export class AdminController {
     return admins.map((admin) => new RetrieveAdminResponse(admin));
   }
 
+  @ApiParam({
+    name: 'id',
+    type: String,
+  })
+  @ApiOkResponse({
+    type: RetrieveAdminResponse,
+  })
   @Get('/:id')
   async get(@Param() param: ByIdDto): Promise<RetrieveAdminResponse> {
     const admin = await this.dbSvc.admin.findUniqueOrThrow({
@@ -79,6 +102,14 @@ export class AdminController {
 
     return new RetrieveAdminResponse(admin);
   }
+
+  @ApiParam({
+    name: 'id',
+    type: String,
+  })
+  @ApiOkResponse({
+    type: OkResponse,
+  })
   @Patch('/:id/pwd')
   async updatePwd(
     @Iam() admin: Admin,
@@ -103,6 +134,13 @@ export class AdminController {
     return new OkResponse(true);
   }
 
+  @ApiParam({
+    name: 'id',
+    type: String,
+  })
+  @ApiOkResponse({
+    type: OkResponse,
+  })
   @Delete(':id')
   async delete(
     @Iam() admin: Admin,

@@ -6,6 +6,7 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Admin, AuditLogActivity, AuditLogResource } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
 import { AuditLogService } from 'src/pkg/audit-log/audit-log.service';
@@ -15,6 +16,7 @@ import { IamService } from 'src/pkg/iam/iam.service';
 import { LoginDto, LoginResponse } from './dto/login.auth.dto';
 import { ProfileResponse } from './dto/profile.auth';
 
+@ApiTags('audit-logs')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -23,6 +25,9 @@ export class AuthController {
     private readonly auditLogSvc: AuditLogService,
   ) {}
 
+  @ApiCreatedResponse({
+    type: LoginResponse,
+  })
   @Post('login')
   async login(@Body() body: LoginDto): Promise<LoginResponse> {
     const admin = await this.dbSvc.admin.findUnique({
@@ -55,6 +60,9 @@ export class AuthController {
     });
   }
 
+  @ApiOkResponse({
+    type: ProfileResponse,
+  })
   @Get('profile')
   @UseGuards(IamGuard)
   async auth(@Iam() admin: Admin): Promise<ProfileResponse> {

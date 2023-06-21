@@ -3,7 +3,7 @@ import { CursorPaginationResponse } from '../dto/cursor-pagination.dto';
 import { Type, applyDecorators } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
-export const ApiOkResponsePaginated = <ItemsDto extends Type<unknown>>(
+export const ApiCursorPaginationOkResponse = <ItemsDto extends Type<unknown>>(
   itemsDto: ItemsDto,
 ) =>
   applyDecorators(

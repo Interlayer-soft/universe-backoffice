@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
-  ApiBearerAuth,
+  ApiCookieAuth,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiTags,
@@ -75,7 +75,7 @@ export class AuthController {
       .send(new OkResponse(true));
   }
 
-  @ApiBearerAuth()
+  @ApiCookieAuth()
   @ApiOkResponse({
     type: ProfileResponse,
   })

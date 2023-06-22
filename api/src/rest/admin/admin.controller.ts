@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
-  ApiBearerAuth,
+  ApiCookieAuth,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiParam,
@@ -28,7 +28,7 @@ import { RetrieveAdminResponse } from './dto/retrieve.admin.dto';
 import { UpdateAdminPwdDto } from './dto/update-pwd.admin.dto';
 
 @ApiTags('admins')
-@ApiBearerAuth()
+@ApiCookieAuth()
 @UseGuards(IamGuard)
 @Controller('admins')
 export class AdminController {

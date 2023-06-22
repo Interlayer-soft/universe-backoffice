@@ -1,12 +1,12 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 import { PrismaService } from 'nestjs-prisma';
 import { ApiCursorPaginationOkResponse } from 'src/pkg/decorator/api-cursor-pagination-ok-response.decorator';
 import { IamGuard } from 'src/pkg/iam/iam.guard';
 import { CursorPaginationResponse } from '../../pkg/dto/cursor-pagination.dto';
 import { ListAuditLogQuery } from './dto/list.audit-log.dto';
 import { RetrieveAuditLogResponse } from './dto/retrieve.audit-log';
-@ApiBearerAuth()
+@ApiCookieAuth()
 @UseGuards(IamGuard)
 @ApiTags('audit-logs')
 @Controller('audit-logs')

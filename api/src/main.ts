@@ -6,6 +6,7 @@ import {
 import { ConfigService, ConfigType } from '@nestjs/config';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 import { AppModule } from './app.module';
 import { APP_CONFIG_KEY, appConfig } from './pkg/conf/app.config';
@@ -18,6 +19,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const { httpAdapter } = app.get(HttpAdapterHost);
 
+  app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

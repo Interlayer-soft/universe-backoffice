@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Res,
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
@@ -13,8 +14,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Admin, AuditLogActivity, AuditLogResource } from '@prisma/client';
+import { Response } from 'express';
 import { PrismaService } from 'nestjs-prisma';
 import { AuditLogService } from 'src/pkg/audit-log/audit-log.service';
+import { OkResponse } from 'src/pkg/dto/ok.dto';
 import { Iam } from 'src/pkg/iam/iam.decorator';
 import { IamGuard } from 'src/pkg/iam/iam.guard';
 import { IamService } from 'src/pkg/iam/iam.service';
@@ -34,7 +37,10 @@ export class AuthController {
     type: LoginResponse,
   })
   @Post('login')
-  async login(@Body() body: LoginDto): Promise<LoginResponse> {
+  async login(
+    @Body() body: LoginDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<void> {
     const admin = await this.dbSvc.admin.findUnique({
       where: {
         username: body.username,
@@ -59,10 +65,14 @@ export class AuthController {
       resource: AuditLogResource.AUTH,
       activity: AuditLogActivity.LOGIN,
     });
-
-    return new LoginResponse({
-      token,
-    });
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        expires: new Date(Date.now() + 1 * 24 * 60 * 1000),
+      })
+      .send(new OkResponse(true));
   }
 
   @ApiBearerAuth()

@@ -19,6 +19,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const { httpAdapter } = app.get(HttpAdapterHost);
 
+  app.enableCors();
   app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({

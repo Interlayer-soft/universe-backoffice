@@ -46,3 +46,17 @@ jobs:
         run: echo "image_name=ghcr.io/${{ steps.repository.outputs.lowercase }}/api:${{ steps.short_sha.outputs.sha_short }}" >> $GITHUB_OUTPUT
     outputs:
       image_name: ${{ steps.set_image_name.outputs.image_name}}
+  deploy:
+    needs: delivery
+    runs-on: ubuntu-latest
+    environment: Staging
+    steps:
+      - uses: deploys-app/deploys-action@v1
+        with:
+          project: universe-backoffice-staging
+          location: gke.cluster-rcf2
+          name: api
+          image: ${{ needs.delivery.outputs.image_name }}
+        env:
+          DEPLOYS_AUTH_USER: ${{ secrets.DEPLOYS_AUTH_USER }}
+          DEPLOYS_AUTH_PASS: ${{ secrets.DEPLOYS_AUTH_PASS }}

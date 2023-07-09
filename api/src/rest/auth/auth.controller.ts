@@ -68,8 +68,8 @@ export class AuthController {
     res
       .cookie('token', token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         expires: new Date(Date.now() + 1 * 24 * 60 * 1000),
       })
       .send(new OkResponse(true));

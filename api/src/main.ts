@@ -21,7 +21,7 @@ async function bootstrap() {
 
   app.enableCors({
     credentials: true,
-    origin: ['https://js-test-axios-vkwzhk.stackblitz.io'],
+    origin: ['http://localhost:5173'],
   });
   app.use(cookieParser());
   app.useGlobalPipes(

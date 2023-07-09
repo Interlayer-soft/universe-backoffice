@@ -19,7 +19,10 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const { httpAdapter } = app.get(HttpAdapterHost);
 
-  app.enableCors();
+  app.enableCors({
+    credentials: true,
+    origin: ['https://js-test-axios-vkwzhk.stackblitz.io'],
+  });
   app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({
